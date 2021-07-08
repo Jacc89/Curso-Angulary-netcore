@@ -1,0 +1,118 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class=" card">
+        <div class="card-body">
+        <h3 class="titulo">Targeta de credito</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-lg-6">
+      <div class=" card">
+        <div class="card-body">
+          <h3 class="titulo">Agregar targeta</h3>
+          <form [formGroup]="form" (ngSutmit)="agregarTargeta()" >
+            <div class="input-group input-group-lg mb-3">
+              <span class="input-group-text" >
+                <i class="fas fa-user"
+               [class.green-icon]="this.form.get('titular')?.valid"
+               [class.red-icon]="this.form.get('titular')?.invalid && this.form.get('titular')?.touched" ></i>
+              </span>
+              <input
+              formControlName="titular"
+              type="text"
+              class="form-control"
+              placeholder="Titular" >
+            </div>
+            <div class="input-group input-group-lg mb-3">
+              <span class="input-group-text" >
+                <i class="fas fa-credit-card"
+                [class.green-icon]="this.form.get('numeroTargeta')?.valid"
+               [class.red-icon]="this.form.get('numeroTargeta')?.invalid && this.form.get('numeroTargeta')?.touched"></i>
+              </span>
+              <input
+              formControlName="numeroTargeta"
+              type="text"
+              maxlength="16"
+              minlength="16"
+              class="form-control"
+              placeholder="Número de Targeta" >
+            </div>
+            <div class="row">
+              <div class="col-lg-7">
+                <div class="input-group input-group-lg mb-3">
+                  <span class="input-group-text" >
+                    <i class="far fa-calendar-alt"
+                    [class.green-icon]="this.form.get('fechaExpiracion')?.valid"
+               [class.red-icon]="this.form.get('fechaExpiracion')?.invalid && this.form.get('fechaExpiracion')?.touched"></i></span>
+                  <input
+                   formControlName="fechaExpiracion"
+                   type="text"
+                   maxlength="5"
+                   class="form-control"
+                   placeholder="mm/yy" >
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="input-group input-group-lg mb-3">
+                  <span class="input-group-text" >
+                    <i class="fas fa-key"
+                    [class.green-icon]="this.form.get('cvv')?.valid"
+                    [class.red-icon]="this.form.get('cvv')?.invalid && this.form.get('cvv')?.touched"></i>
+                  </span>
+                  <input
+                  formControlName="cvv"
+                  maxlength="3"
+                  type="text"
+                  class="form-control"
+                  placeholder="CVV" >
+                </div>
+              </div>
+            </div>
+            <div class="d-grid gap-2">
+              <!-- <button [disabled]="this.form.invalid"
+              type="submit"
+              class="btn btn-success btn-lg">
+                <i class="fas fa-database"></i>  Aceptar</button> -->
+            </div>
+            <div class="d-grid gap-2"  >
+              <button type="submit"
+              [disabled]="this.form.invalid"
+              class="btn btn-success btn-lg">
+              <i class="fas fa-database"></i> Save
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-6">
+      <div class=" card">
+        <div class="card-body">
+          <h3 class="titulo">Listado de targetas</h3>
+          <table class="table">
+            <tbody>
+              <tr *ngFor="let targeta of listaTargetas; let i = index">
+                <td>{{targeta.titular}}</td>
+                <td>{{targeta.numeroTargeta}}</td>
+                <td>{{targeta.fechaExpiracion}}</td>
+                <td>{{targeta.cvv}}</td>
+                <td><i class="far fa-edit text-info"></i></td>
+                <td><i (click)="eliminarTargeta(i)" class="far fa-trash-alt text-danger"></i></td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
